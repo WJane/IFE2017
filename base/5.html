@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单（二）多个表单项的动态校验</title>
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	<div id="form">
+		<div>
+			<label for="名称">名称</label>
+			<input class="in" type="text" placeholder="">
+			<span>必填，长度为4-16的字符串</span>
+		</div>
+		<div>
+			<label for="密码">密码</label>
+			<input class="in" type="text" placeholder="">
+			
+		</div>
+		<div>
+			<label for="密码确认">密码确认</label>
+			<input class="in" type="text" placeholder="">
+			
+		</div>
+		<div>
+			<label for="邮箱">邮箱</label>
+			<input class="in" type="text" placeholder="">
+			
+		</div>
+		<div>
+			<label for="手机">手机</label>
+			<input class="in" type="text" placeholder="">
+			
+		</div>
+		
+		<div id="show">
+			<input type="submit">
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+	var ins = document.getElementsByTagName('in');
+	for(var i=0;i<ins.length;i++){
+		ins[i].onfocus = function(){
+
+		}
+	}
+	
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单（一）单个表单项的检验</title>
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	<div id="form">
+		<div>
+			<label for="名称">名称</label>
+			<input id="val" type="text" placeholder="">
+			<input id="check" class="check" type="button" value="验证">
+		</div>
+		<div id="show">必填，长度为4~16个字符</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+	var checks = document.getElementById('check');
+
+		
+	function validate() {
+		var val = document.getElementById('val').value;
+		var show = document.getElementById('show');
+		var strLen = 0;
+		for(var i=0;i<val.length;i++){
+			var code = val.charCodeAt(i);
+			if(code >= 0xFF||code<=0x00){
+				strLen+=2;
+			}else{
+				strLen++;
+			}
+		}
+
+		if(strLen==0){
+			show.innerText = '输入不能为空';
+		}else if(strLen<4||strLen>16){
+
+			show.innerText = '长度必须为4-16';
+		}else {
+			show.innerText = '通过验证';
+		}
+	}
+
+	checks.onclick = function() {
+		validate();
+	}
+	
+</script>
+</html>
