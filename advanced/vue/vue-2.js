@@ -1,7 +1,10 @@
 // 观察者构造函数
+var that;
 function Observer(data) {
     this.data = data;
-    this.walk(data)
+    this.walk(data);
+    this.handlers = {};
+    that = this;
 }
 
 let p = Observer.prototype;
@@ -28,7 +31,18 @@ p.walk = function (obj) {
     }
 };
 
+p.$watch = function (property, handler) {
+    var prop = arguments[0];//要修改监听的属性
+    //var arg = arguments[1].toString().match(/function\s.*?\(([^)]*)\)/)[1];//新属性
+    if(!(prop in this.handlers)) {
+        this.handlers[prop] = undefined;
+    }
+    this.handlers[prop] = handler;
+    // handler(that.data.user[prop], val)
+}
+
 p.convert = function (key, val) {
+    var self = this;
     Object.defineProperty(this.data, key, {
         enumerable: true,
         configurable: true,
@@ -40,7 +54,8 @@ p.convert = function (key, val) {
             console.log('你设置了' + key);
             console.log('新的' + key + ' = ' + newVal)
             if (newVal === val) return;
-            val = newVal
+            val = newVal;
+            that.handlers[key].apply(this, [newVal]);
         }
     })
 };
@@ -56,4 +71,13 @@ let data = {
 };
 
 let app = new Observer(data);
-console.log(app.data.user.first = 2);
+
+app.$watch('age', function(age) {
+     console.log('我的年纪变了，现在已经是：'+age+'岁了')
+});
+
+app.$watch('name', function(name) {
+     console.log('我是'+name)
+});
+
+app.data.user.name = 'wz';
