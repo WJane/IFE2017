@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vue-4</title>
+</head>
+<body>
+  <div id="app">
+    <p>姓名：{{user.name}}</p>
+    <p>年龄：{{user.age}}</p>
+</div>
+</body>
+<script type="text/javascript">
+
+  (function(global){
+    function Vue(data) {
+      this.data = data;
+      this.render(data)
+    }
+
+    Vue.prototype.render = function(data) {
+      var el = document.querySelector(data.el);
+      var content = el.innerHTML;
+      var reg = /{{\S+}}/g; //匹配所有{{...}}
+      var arr;
+      var copy = content;
+
+      while((arr = reg.exec(content))!==null) {
+        var item = arr[0];
+
+        var itemContent = /{{(.*?)}}/.exec(item); //取出{{}}中的内容
+
+        var val = getVal(data.data, itemContent[1]);
+        copy = copy.replace(item, val)
+
+      }
+      document.querySelector(data.el).innerHTML = copy;
+
+      function getVal(data, con) {
+
+        var arr = con.split('.');
+        var val = data;
+        arr.forEach(function(k){
+          val = val[k]
+        })
+        return val;
+      }
+    }
+    global.Vue = Vue;
+  })(window);
+
+  let app = new Vue({
+    el: '#app',
+    data: {
+      user: {
+        name: 'youngwind',
+        age: 25
+      }
+    }
+});
+</script>
+</html>
