@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>听指令的小方块（一）</title>
+  <style type="text/css">
+  #content{
+
+    position: relative;
+    margin: 0 auto;
+    width: 700px;
+    height: 600px;
+
+  }
+    #container{
+     /* position: absolute;
+      left: 65px;
+      top: 50px;*/
+      position: relative;
+      left: 60px;
+      top: 50px;
+      display: grid;
+      grid-template-columns: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+      grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+      border: 2px solid #333;
+      width: 500px;
+    }
+    .item{
+      border: 1px solid silver;
+    }
+    .axis{
+      display: inline-block;
+      position: absolute;
+    }
+    .x .number{
+      display: inline-block;
+      width: 45px;
+    }
+    .x{
+
+      left: 70px;
+      width: 500px;
+    }
+    .y{
+
+      left: 0;
+      top: 60px;
+      height: 500px;
+    }
+    .number{
+      width: 50px;
+      height: 50px;
+
+      text-align: center;
+      line-height: 50px;
+      vertical-align: middle;
+    }
+    #target{
+      box-sizing:border-box;
+      width: 50px;
+      height: 50px;
+      background: red;
+      position: absolute;
+      left: 200px;
+      top: 200px;
+    }
+    #header{
+      box-sizing: border-box;
+      width: 50px;
+      height: 20px;
+      background: blue;
+
+
+    }
+  </style>
+</head>
+<body>
+
+<div id="content">
+  <div id="coordinate">
+    <div class="x axis">
+      <div class="number">1</div>
+      <div class="number">2</div>
+      <div class="number">3</div>
+      <div class="number">4</div>
+      <div class="number">5</div>
+      <div class="number">6</div>
+      <div class="number">7</div>
+      <div class="number">8</div>
+      <div class="number">9</div>
+      <div class="number">10</div>
+    </div>
+    <div class="y axis">
+      <div class="number">1</div>
+      <div class="number">2</div>
+      <div class="number">3</div>
+      <div class="number">4</div>
+      <div class="number">5</div>
+      <div class="number">6</div>
+      <div class="number">7</div>
+      <div class="number">8</div>
+      <div class="number">9</div>
+      <div class="number">10</div>
+    </div>
+  </div>
+  <div id="container">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div id="target">
+      <div id="header"></div>
+      <div id="tail"></div>
+    </div>
+  </div>
+
+
+</div>
+
+<div id="operation">
+  <input type="text" id="order">
+  <input id="btn" type="button" value="执行">
+</div>
+<script type="text/javascript">
+window.onload = function(){
+
+
+  var btn = document.getElementById('btn');
+  var tar = document.getElementById('target');
+  var deg = 0;
+
+  function getOrder(){
+    var order = document.getElementById('order').value;
+
+    switch(order){
+      case 'GO':
+        //直行
+        go();
+        return;
+      case 'TUN LEF':
+        //逆时针旋转90°
+        deg-=90;
+        tar.style.transform = 'rotate('+deg+'deg)';
+        return;
+      case 'TUN RIG':
+        //顺时针旋转90
+        deg+=90
+        tar.style.transform = 'rotate('+deg+'deg)';
+        return;
+      case 'TUN BAC':
+        //掉头
+        deg+=180;
+        tar.style.transform = 'rotate('+deg+'deg)';
+        return;
+      case 'TRA LEF':
+        var ta = tar.offsetLeft-50>0?tar.offsetLeft-50:0;
+        tar.style.left = ta + 'px';
+        return;
+      case 'TAR TOP':
+        var ta = tar.offsetTop-50>0?tar.offsetTop-50:0;
+        tar.style.top = ta + 'px';
+        return;
+      case 'TAR RIG':
+        var ta = tar.offsetLeft+50<450?tar.offsetLeft+50:450;
+        tar.style.left = ta + 'px';
+        return;
+      case 'TAR BOT':
+        var ta = tar.offsetTop+50<450?tar.offsetTop+50:450;
+        tar.style.top = ta + 'px';
+        return;
+
+      case 'MOV LEF':
+        var ta = tar.offsetLeft-50>0?tar.offsetLeft-50:0;
+        tar.style.left = ta + 'px';
+        deg=90;
+        tar.style.transform = 'rotate('+deg+'deg)';
+        return;
+      case 'MOV TOP':
+        var ta = tar.offsetTop-50>0?tar.offsetTop-50:0;
+        tar.style.top = ta + 'px';
+        deg=0;
+        tar.style.transform = 'rotate('+deg+'deg)';
+        return;
+      case 'MOV RIG':
+        var ta = tar.offsetLeft+50<450?tar.offsetLeft+50:450;
+        tar.style.left = ta + 'px';
+        deg=-90;
+        tar.style.transform = 'rotate('+deg+'deg)';
+        return;
+      case 'MOV BOT':
+        var ta = tar.offsetTop+50<450?tar.offsetTop+50:450;
+        tar.style.top = ta + 'px';
+        deg=180;
+        tar.style.transform = 'rotate('+deg+'deg)';
+        return;
+
+      default:
+        // alert();
+    }
+  }
+
+  function go(){
+    var a = deg/90%4;
+    var res = a<0?a+4:a;
+    switch(res){
+      case 0:
+        var move = tar.offsetTop-50>0?tar.offsetTop-50:0;
+        tar.style.top = move + 'px';
+        return;
+      case 1:
+        var move = tar.offsetLeft+50<450?tar.offsetLeft+50:450;
+        tar.style.left = move + 'px';
+        return;
+      case 2:
+        var move = tar.offsetTop+50<450?tar.offsetTop+50:450;
+        tar.style.top = move + 'px';
+        return;
+      case 3:
+        var move = tar.offsetLeft-50>0?tar.offsetLeft-50:0;
+        tar.style.left = move + 'px';
+        return;
+      default:
+        return;
+    }
+  }
+
+  btn.onclick = function(){
+
+    getOrder();
+
+  }
+}
+
+
+
+
+</script>
+</body>
+</html>
