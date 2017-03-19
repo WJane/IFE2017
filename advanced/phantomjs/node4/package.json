@@ -1,0 +1,33 @@
+{
+  "name": "koa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel index.js -o app.js&&node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "body-parser": "^1.17.1",
+    "co-body": "^5.0.2",
+    "jquery": "^3.2.0",
+    "koa": "^2.2.0",
+    "koa-bodyparser": "next",
+    "koa-convert": "^1.2.0",
+    "koa-router": "^7.0.1",
+    "koa-static": "next",
+    "koa-views": "^6.0.1",
+    "mongoose": "^4.9.0",
+    "phantom": "^4.0.0"
+  },
+  "dependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-preset-es2015": "^6.24.0",
+    "koa-pug": "^3.0.0-2"
+  }
+}
