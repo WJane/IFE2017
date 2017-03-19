@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>有趣的鼠标悬浮模糊效果</title>
+  <style type="text/css">
+    body{
+      margin: 0;
+      display: flex;
+      min-height: 100vh;
+      font-size: 1.2rem;
+    }
+    .wraper{
+      margin: auto;
+      display: flex;
+      width: 600px;
+      height: 400px;
+
+    }
+    #content{
+      background: url(img/1.png) center center no-repeat;
+      position:relative;
+      width:400px;
+      height:180px;
+    }
+    #main{
+
+      margin: auto;
+      text-align: center;
+      width: 400px;
+      height: 180px;
+      color: white;
+      z-index: 2;
+      position: absolute;
+    }
+    #content:hover #iam{
+      animation: gradient 1s linear infinite;
+    }
+
+
+    #iam{
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-image: -webkit-linear-gradient(left,red,orange 25%,yellow 50%,green 75%,blue 100%);
+      background-size: 200% 100%;
+
+    }
+
+    @keyframes gradient{
+      from{background-position: 0% 0%;}
+      to{background-position: -100% 0%;}
+    }
+
+    #border::before,#border::after{
+      content: '';
+      position: absolute;
+      box-sizing: border-box;
+      transition: .5s linear;
+      background: #fff;
+      width: 5px;
+      top: 50%;
+      height:1px;
+
+    }
+    #border::before{
+      left: 0;
+
+
+    }
+    #border::after{
+      right: 0;
+
+
+
+
+    }
+    #content:hover #border::before{
+
+      transform: scaleY(150);
+
+    }
+    #content:hover #border::after{
+      transform: scaleY(150);
+    }
+
+ #main::before,#main::after{
+      content: '';
+      position: absolute;
+      box-sizing: border-box;
+      transition: .5s linear;
+      background: #fff;
+      width: 1px;
+      left: 50%;
+      height:5px;
+
+    }
+    #main::before{
+      top: 0;
+
+
+    }
+    #main::after{
+      bottom: 0;
+
+
+
+
+    }
+    #content:hover #main::before{
+
+      transform: scaleX(150);
+
+    }
+    #content:hover #main::after{
+      transform: scaleX(150);
+    }
+
+    #content::before{
+          content:'';
+      position:absolute;
+      top:0;
+      right:0;
+      bottom:0;
+      left:0;
+      transition:filter 0.3s linear;
+      background: url(img/1.png) center center no-repeat;
+    }
+
+    #content:hover::before{
+        filter:blur(2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="wraper">
+    <div id="content">
+      <div id="border">
+        <div id="main">
+          <div id="iam">我是Jane，要好好学习技术。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

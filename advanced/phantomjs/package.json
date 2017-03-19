@@ -12,6 +12,7 @@
   "author": "wz",
   "license": "ISC",
   "dependencies": {
+    "mongoose": "^4.9.0",
     "phantom": "^4.0.0"
   }
 }
