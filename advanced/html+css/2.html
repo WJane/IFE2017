@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义checkbox、radio</title>
+  <style type="text/css">
+    #awesome+label::before{
+      content: '\a0';
+      display: inline-block;
+      vertical-align: .23m;
+      width: .8em;
+      height: .8em;
+      margin-right: .2em;
+      border-radius: .2em;
+      border: 2px solid silver;
+      text-indent: .15em;
+      line-height: .65;
+    }
+
+    #awesome:checked+label::before{
+      content: '\2713';
+      color: tomato;
+      border: 2px solid tomato;
+    }
+    #awesome,.radio{
+      position: absolute;
+      clip: rect(0,0,0,0);
+    }
+
+    .radio+label::before{
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+      width: .8em;
+      height: .8em;
+      margin-right: .2em;
+      border-radius: .2em;
+      border: 2px solid silver;
+      border-radius: 50%;
+      text-align: center;
+      line-height: .65;
+      background: white;
+      color: silver;
+
+    }
+    .radio:checked+label::before{
+      content: '\25CF';
+      color: tomato;
+      border: 2px solid tomato;
+
+    }
+
+
+
+  </style>
+</head>
+<body>
+  <div class ="checkbox">
+
+    <input type="checkbox" id="awesome">
+    <label for="awesome">checkbox</label>
+  </div>
+        <div class="radios">
+            <input type="radio" name="sex1"  id="radioBox_sprit" class=" radio">
+            <label for="radioBox_sprit">male</label>
+            <input type="radio" name="sex1"  id="radioBox1_sprit" class=" radio">
+            <label for="radioBox1_sprit">female</label>
+        </div>
+
+
+    </div>
+</body>
+</html>
