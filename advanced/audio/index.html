@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>仿豆瓣音乐播放器</title>
+  <style type="text/css">
+    #progressBar {
+   border:1px solid #aaa;
+   color:#fff;
+   width:295px;
+   height:20px;
+}
+#progress {
+   background-color:#ff0000; // red
+   height:20px;
+   display:inline-block;
+}
+  </style>
+</head>
+<body>
+<div id="name">22</div>
+
+<button id="pause">暂停</button>
+<button id="cut">下一首</button>
+<input id="volume" min="0" max="1" step="0.1" type="range" />
+<button id="fast-forward">快进</button>
+<div id="progressBar"><span id="progress"></span></div>
+
+<!-- <button id="mute" onclick="toggleMute()">静音</button> -->
+
+<div id="audioBox"></div>
+<script type="text/javascript">
+    window.onload = function(){
+        var arr = ["static/Taylor Swift - 22.mp3","static/Taylor Swift - Back to December.flac","static/Taylor Swift - Bad Blood.flac"];//把需要播放的歌曲从后往前排
+        var narr = ['22', 'back to december','bad blood']
+        var names = document.getElementById('name')
+        var myAudio = new Audio();
+        myAudio.preload = true;
+        // myAudio.controls = true;
+        myAudio.src = arr.pop();//每次读数组最后一个元素
+        myAudio.addEventListener('ended', playEndedHandler, false);
+        myAudio.play();
+        document.getElementById("audioBox").appendChild(myAudio);
+        myAudio.loop = false;//禁止循环，否则无法触发ended事件
+        function playEndedHandler(){
+            myAudio.src = arr.pop();
+            myAudio.play();
+            names.innerText = narr.pop()
+            !arr.length && myAudio.removeEventListener('ended',playEndedHandler,false);//只有一个元素时解除绑定
+        }
+        document.getElementById('pause').onclick=function(){
+          myAudio.pause();
+        }
+        var cut = document.getElementById('cut');
+        var forward = document.getElementById('fast-forward');
+        cut.onclick=function(){
+          playEndedHandler();
+        }
+        forward.onclick=function(){
+          myAudio.currentTime += 30.0;
+        }
+
+        document.getElementById('volume').onclick = function(){
+          setVolume()
+        }
+        function setVolume(){
+
+        }
+        function toggleMuted(){
+          myAudio.muted = !myAudio.muted
+        }
+
+        function updateProgress() {
+           var progress = document.getElementById("progress");
+           var value = 0;
+           if (video.currentTime > 0) {
+              value = Math.floor((100 / video.duration) * video.currentTime);
+           }
+           progress.style.width = value + "%";
+        }
+
+
+    }
+</script>
+</body>
+</html>
