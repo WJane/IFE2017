@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript和树（二）</title>
+  <script src="bundle.js"></script>
+  <style type="text/css">
+    #super{
+    border: 1px solid navy;
+    width: 1300px;
+    height: 520px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1rem;
+  }
+
+  .child1,.child2,.child3,.child4{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: white;
+    border: 1px solid navy;
+    padding: 5px;
+    margin: 5px;
+    width: 80%;
+    height: 80%;
+    text-align: center;
+  }
+  </style>
+</head>
+<body>
+<div id="container">
+  <div class="child0" id="super">super
+    <div class="child1" id="cat">cat
+      <div class="child2" id="apple">apple
+        <div class="child3" id="pear">pear</div>
+        <div class="child3" id="pig">pig</div>
+        <div class="child3" id="cola">cola</div>
+        <div class="child3" id="soccer">soccer</div>
+      </div>
+      <div class="child2" id="phone">
+        phone
+      </div>
+      <div class="child2" id="study">study
+        <div class="child3" id="book">book</div>
+        <div class="child3" id="school">school</div>
+      </div>
+    </div>
+
+    <div class="child1" id="note">note
+      <div class="child2" id="human">human
+        <div class="child3" id="code">code</div>
+        <div class="child3" id="operate">operate</div>
+        <div class="child3" id="man">man</div>
+      </div>
+      <div class="child2" id="program">program
+        <div class="child3" id="glass">glass</div>
+        <div class="child3" id="bement">bement
+          <div class="child4" id="scat">cat</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="child1" id="fish">
+      fish
+    </div>
+  </div>
+
+
+</div>
+
+<button id="breadth">广度优先遍历</button>
+<button id="deepth">深度优先遍历</button>
+<input type="text" placeholder="请输入查找目标" id="target">
+<button id="search">查找</button>
+
+
+
+</body>
+</html>

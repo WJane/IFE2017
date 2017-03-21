@@ -2,9 +2,8 @@
   "name": "base",
   "version": "1.0.0",
   "description": "",
-  "main": "12.js",
   "scripts": {
-    "build": "babel 12.js -o app.js&&browserify app.js -o bundle.js"
+    "build": "babel 13.js -o app.js&&browserify app.js -o bundle.js"
   },
   "author": "",
   "license": "ISC",
