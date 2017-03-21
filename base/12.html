@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript和树（一）</title>
+  <style type="text/css">
+    #content{
+      display: flex;
+      min-height: 600px;
+    }
+    #button{
+      height: 80px;
+    }
+    button{
+      width: 100px;
+      height: 40px;
+    }
+    div{
+      border: 2px solid navy;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background: white;
+    }
+    #frame{
+      margin: auto;
+      width: 700px;
+      height: 400px;
+
+    }
+    .frame-1{
+      width: 330px;
+      height: 350px;
+    }
+
+    .frame-2{
+      width: 140px;
+      height: 320px;
+    }
+    .frame-3{
+      width: 40px;
+      height: 280px;
+
+    }
+  </style>
+</head>
+<body>
+  <div id="content">
+    <div id="frame">
+      <div class="frame-1">
+        <div class="frame-2">
+          <div class="frame-3"></div>
+          <div class="frame-3"></div>
+        </div>
+        <div class="frame-2">
+          <div class="frame-3"></div>
+          <div class="frame-3"></div>
+        </div>
+      </div>
+      <div class="frame-1">
+        <div class="frame-2">
+          <div class="frame-3"></div>
+          <div class="frame-3"></div>
+        </div>
+        <div class="frame-2">
+          <div class="frame-3"></div>
+          <div class="frame-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="button">
+    <button id="pre">preOrder</button>
+    <button id="in">inOrder</button>
+    <button id="post">postOrder</button>
+  </div>
+
+
+<script type="text/javascript">
+  function Tree(root) {
+    this.root = root;
+    this.queue = [];
+  }
+  //先根遍历 根左右
+  Tree.prototype.preOrder = function(node) {
+    node = node || this.root
+    this.queue.push(node)
+    if(node.firstElementChild) {
+      this.preOrder(node.firstElementChild)
+    }
+    if(node.lastElementChild) {
+      this.preOrder(node.lastElementChild)
+    }
+  }
+  //中根遍历 左根右
+
+  Tree.prototype.inOrder = function(node) {
+    node = node || this.root
+    if(node.firstElementChild) {
+      this.inOrder(node.firstElementChild)
+    }
+    this.queue.push(node)
+    if(node.lastElementChild) {
+      this.inOrder(node.lastElementChild)
+    }
+  }
+
+  //后根遍历  左右根
+  Tree.prototype.postOrder = function(node) {
+    node = node||this.root
+    if(node.firstElementChild) {
+      this.postOrder(node.firstElementChild)
+    }
+    if(node.lastElementChild) {
+      this.postOrder(node.lastElementChild)
+    }
+    this.queue.push(node)
+  }
+
+  Tree.prototype.show = function() {
+
+    var arr = this.queue;
+    console.log(arr.length)
+    console.log(arr)
+    for (var i = 0; i <= arr.length; i++) {
+        (function(j) {  // j = i
+            setTimeout(function() {
+                if(j-1>0){
+                  arr[j-1].style.background = 'white'
+                }else{
+                  arr[0].style.background = 'white'
+                }
+                arr[j].style.background = 'navy'
+            }, 400*j);
+        })(i);
+    }
+  }
+
+  window.onload = function(){
+    var root = document.getElementById('frame');
+
+
+    document.getElementById('pre').onclick=function(){
+      var tree = new Tree(root);
+      tree.preOrder(root);
+      tree.show();
+
+    }
+    document.getElementById('in').onclick=function(){
+      var tree = new Tree(root);
+      tree.inOrder(root);
+      tree.show();
+
+    }
+    document.getElementById('post').onclick=function(){
+      var tree = new Tree(root);
+      tree.postOrder(root);
+      tree.show();
+
+    }
+  }
+
+
+
+</script>
+</body>
+</html>
