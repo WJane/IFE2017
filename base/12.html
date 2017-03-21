@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>JavaScript和树（一）</title>
+  <script src="./app.js"></script>
   <style type="text/css">
     #content{
       display: flex;
@@ -78,88 +79,87 @@
 
 
 <script type="text/javascript">
-  function Tree(root) {
-    this.root = root;
-    this.queue = [];
-  }
-  //先根遍历 根左右
-  Tree.prototype.preOrder = function(node) {
-    node = node || this.root
-    this.queue.push(node)
-    if(node.firstElementChild) {
-      this.preOrder(node.firstElementChild)
-    }
-    if(node.lastElementChild) {
-      this.preOrder(node.lastElementChild)
-    }
-  }
-  //中根遍历 左根右
+  // function Tree(root) {
+  //   this.root = root;
+  //   this.queue = [];
+  // }
+  // //先根遍历 根左右
+  // Tree.prototype.preOrder = function(node) {
+  //   node = node || this.root
+  //   this.queue.push(node)
+  //   if(node.firstElementChild) {
+  //     this.preOrder(node.firstElementChild)
+  //   }
+  //   if(node.lastElementChild) {
+  //     this.preOrder(node.lastElementChild)
+  //   }
+  // }
+  // //中根遍历 左根右
 
-  Tree.prototype.inOrder = function(node) {
-    node = node || this.root
-    if(node.firstElementChild) {
-      this.inOrder(node.firstElementChild)
-    }
-    this.queue.push(node)
-    if(node.lastElementChild) {
-      this.inOrder(node.lastElementChild)
-    }
-  }
+  // Tree.prototype.inOrder = function(node) {
+  //   node = node || this.root
+  //   if(node.firstElementChild) {
+  //     this.inOrder(node.firstElementChild)
+  //   }
+  //   this.queue.push(node)
+  //   if(node.lastElementChild) {
+  //     this.inOrder(node.lastElementChild)
+  //   }
+  // }
 
-  //后根遍历  左右根
-  Tree.prototype.postOrder = function(node) {
-    node = node||this.root
-    if(node.firstElementChild) {
-      this.postOrder(node.firstElementChild)
-    }
-    if(node.lastElementChild) {
-      this.postOrder(node.lastElementChild)
-    }
-    this.queue.push(node)
-  }
+  // //后根遍历  左右根
+  // Tree.prototype.postOrder = function(node) {
+  //   node = node||this.root
+  //   if(node.firstElementChild) {
+  //     this.postOrder(node.firstElementChild)
+  //   }
+  //   if(node.lastElementChild) {
+  //     this.postOrder(node.lastElementChild)
+  //   }
+  //   this.queue.push(node)
+  // }
 
-  Tree.prototype.show = function() {
+  // Tree.prototype.show = function() {
 
-    var arr = this.queue;
-    console.log(arr.length)
-    console.log(arr)
-    for (var i = 0; i <= arr.length; i++) {
-        (function(j) {  // j = i
-            setTimeout(function() {
-                if(j-1>0){
-                  arr[j-1].style.background = 'white'
-                }else{
-                  arr[0].style.background = 'white'
-                }
-                arr[j].style.background = 'navy'
-            }, 400*j);
-        })(i);
-    }
-  }
+  //   var arr = this.queue;
 
-  window.onload = function(){
-    var root = document.getElementById('frame');
+  //   for (var i = 0; i <= arr.length; i++) {
+  //       (function(j) {  // j = i
+  //           setTimeout(function() {
+  //               if(j-1>0){
+  //                 arr[j-1].style.background = 'white'
+  //               }else{
+  //                 arr[0].style.background = 'white'
+  //               }
+  //               arr[j].style.background = 'navy'
+  //           }, 400*j);
+  //       })(i);
+  //   }
+  // }
+
+  // window.onload = function(){
+  //   var root = document.getElementById('frame');
 
 
-    document.getElementById('pre').onclick=function(){
-      var tree = new Tree(root);
-      tree.preOrder(root);
-      tree.show();
+  //   document.getElementById('pre').onclick=function(){
+  //     var tree = new Tree(root);
+  //     tree.preOrder(root);
+  //     tree.show();
 
-    }
-    document.getElementById('in').onclick=function(){
-      var tree = new Tree(root);
-      tree.inOrder(root);
-      tree.show();
+  //   }
+  //   document.getElementById('in').onclick=function(){
+  //     var tree = new Tree(root);
+  //     tree.inOrder(root);
+  //     tree.show();
 
-    }
-    document.getElementById('post').onclick=function(){
-      var tree = new Tree(root);
-      tree.postOrder(root);
-      tree.show();
+  //   }
+  //   document.getElementById('post').onclick=function(){
+  //     var tree = new Tree(root);
+  //     tree.postOrder(root);
+  //     tree.show();
 
-    }
-  }
+  //   }
+  // }
 
 
 
