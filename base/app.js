@@ -2,6 +2,10 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+require('babel-polyfill');
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Tree = function () {
@@ -51,32 +55,83 @@ var Tree = function () {
   }, {
     key: 'show',
     value: function show() {
-      var arr = this.queue;
-      var tasks = [];
-      var render = function render(i) {
-        return new Promise(function (resolve) {
-          setTimeout(function () {
-            if (i - 1 > 0) {
-              arr[i - 1].style.background = 'white';
-            } else {
-              arr[0].style.background = 'white';
-            }
-            if (arr[i]) {
-              arr[i].style.background = 'navy';
-            }
+      var _this = this;
 
-            resolve();
-          }, 200 * i);
+      var arr = this.queue;
+      // const tasks = []
+      // const render = (i) => new Promise((resolve)=>{
+      //   setTimeout(()=>{
+      //     if(i-1>0){
+      //       arr[i-1].style.background = 'white'
+      //     }else{
+      //       arr[0].style.background = 'white'
+      //     }
+      //     if(arr[i]){
+      //       arr[i].style.background = 'navy'
+      //     }
+
+      //     resolve()
+      //   }, 200*i)
+      // })
+      // for(var i=0;i<=arr.length;i++){
+      //   tasks.push(render(i))
+      // }
+      // Promise.all(tasks).then(()=>{
+      //   console.log(i)
+
+      // })
+      var sleep = function sleep(timeountMS) {
+        return new Promise(function (resolve) {
+          setTimeout(resolve, timeountMS);
         });
       };
-      for (var i = 0; i <= arr.length; i++) {
-        tasks.push(render(i));
-      }
-      Promise.all(tasks).then(function () {
-        console.log(i);
-        // console.log(arr[i])
-        // arr[i-1].style.background = 'navy'
-      });
+
+      _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+        var i;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                i = 0;
+
+              case 1:
+                if (!(i <= arr.length)) {
+                  _context.next = 9;
+                  break;
+                }
+
+                _context.next = 4;
+                return sleep(200);
+
+              case 4:
+                if (i - 1 > 0) {
+                  arr[i - 1].style.background = 'white';
+                } else {
+                  arr[0].style.background = 'white';
+                }
+                if (arr[i]) {
+                  arr[i].style.background = 'navy';
+                }
+
+              case 6:
+                i++;
+                _context.next = 1;
+                break;
+
+              case 9:
+                _context.next = 11;
+                return sleep(200);
+
+              case 11:
+                console.log(i);
+
+              case 12:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, _this);
+      }))();
     }
   }]);
 

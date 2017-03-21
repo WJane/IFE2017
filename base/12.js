@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 
 class Tree {
   constructor(root) {
@@ -40,28 +41,52 @@ class Tree {
 
   show() {
     const arr = this.queue
-    const tasks = []
-    const render = (i) => new Promise((resolve)=>{
-      setTimeout(()=>{
-        if(i-1>0){
-          arr[i-1].style.background = 'white'
-        }else{
-          arr[0].style.background = 'white'
-        }
-        if(arr[i]){
-          arr[i].style.background = 'navy'
+    //es6   promise写法
+    // const tasks = []
+    // const render = (i) => new Promise((resolve)=>{
+    //   setTimeout(()=>{
+    //     if(i-1>0){
+    //       arr[i-1].style.background = 'white'
+    //     }else{
+    //       arr[0].style.background = 'white'
+    //     }
+    //     if(arr[i]){
+    //       arr[i].style.background = 'navy'
+    //     }
+
+    //     resolve()
+    //   }, 200*i)
+    // })
+    // for(var i=0;i<=arr.length;i++){
+    //   tasks.push(render(i))
+    // }
+    // Promise.all(tasks).then(()=>{
+    //   console.log(i)
+
+    // })
+
+    //es7   async函数写法
+    const sleep = (timeountMS) => new Promise((resolve) => {
+        setTimeout(resolve, timeountMS);
+    });
+
+    (async () => {  // 声明即执行的 async 函数表达式
+        for (var i = 0; i <= arr.length; i++) {
+            await sleep(200);
+            if(i-1>0){
+              arr[i-1].style.background = 'white'
+            }else{
+              arr[0].style.background = 'white'
+            }
+            if(arr[i]){
+              arr[i].style.background = 'navy'
+            }
         }
 
-        resolve()
-      }, 200*i)
-    })
-    for(var i=0;i<=arr.length;i++){
-      tasks.push(render(i))
-    }
-    Promise.all(tasks).then(()=>{
-      console.log(i)
+        await sleep(200);
+    })();
 
-    })
+
   }
 
 }
