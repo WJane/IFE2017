@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript和树（三）</title>
+  <script src="bundle.js"></script>
+  <style type="text/css">
+    #super{
+    border: 1px solid navy;
+    width: 1300px;
+    height: 520px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1rem;
+  }
+
+  .child{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: white;
+    border: 1px solid navy;
+    padding: 5px;
+    margin: 5px;
+    width: 80%;
+    height: 80%;
+    text-align: center;
+  }
+  </style>
+</head>
+<body>
+<div id="container">
+  <div class="child0" id="super">super
+    <div class="child" id="cat">cat
+      <div class="child" id="apple">apple
+        <div class="child" id="pear">pear</div>
+        <div class="child" id="pig">pig</div>
+        <div class="child" id="cola">cola</div>
+        <div class="child" id="soccer">soccer</div>
+      </div>
+      <div class="child" id="phone">
+        phone
+      </div>
+      <div class="child" id="study">study
+        <div class="child" id="book">book</div>
+        <div class="child" id="school">school</div>
+      </div>
+    </div>
+
+    <div class="child" id="note">note
+      <div class="child" id="human">human
+        <div class="child" id="code">code</div>
+        <div class="child" id="operate">operate</div>
+        <div class="child" id="man">man</div>
+      </div>
+      <div class="child" id="program">program
+        <div class="child" id="glass">glass</div>
+        <div class="child" id="bement">bement
+          <div class="child" id="scat">cat</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="child" id="fish">
+      fish
+    </div>
+  </div>
+
+
+</div>
+
+<button id="breadth">广度优先遍历</button>
+<button id="deepth">深度优先遍历</button>
+<input type="text" placeholder="请输入查找目标" id="target">
+<button id="search">查找</button>
+<button id="delete">删除</button>
+<input type="text" placeholder="请输入新增节点" id="new">
+<button id="add">添加</button>
+
+
+</body>
+</html>

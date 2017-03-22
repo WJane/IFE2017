@@ -5,6 +5,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 require('babel-polyfill');
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15,6 +17,7 @@ var MultiTree = function () {
 
     this.root = root;
     this.queue = [];
+    this.selected = null;
   }
 
   //深度优先遍历
@@ -125,15 +128,9 @@ var MultiTree = function () {
 
       this.show();
 
-      if (index == -1) {
-        setTimeout(function () {
-          alert('没有找到');
-        }, 250 * temp.length);
-      } else {
-        setTimeout(function () {
-          _this2.queue[index].style.background = 'navy';
-        }, 250 * index);
-      }
+      setTimeout(function () {
+        _this2.queue[index].style.background = 'navy';
+      }, 250 * index);
     }
   }]);
 
@@ -142,27 +139,48 @@ var MultiTree = function () {
 
 window.onload = function () {
   var root = document.getElementById('container');
-  var breadth = document.getElementById('breadth');
-  var deepth = document.getElementById('deepth');
-  var search = document.getElementById('search');
+  var tree = new MultiTree(tree);
+  document.onclick = function (event) {
+    var tar = event.target.id;
 
-  search.onclick = function () {
-    var tree = new MultiTree(tree);
-    var target = document.getElementById('target').value;
-    tree.search(target, root);
-  };
-  breadth.onclick = function () {
+    switch (tar) {
+      case 'breadth':
 
-    var tree = new MultiTree(root);
-    tree.breadth(root);
+        tree.breadth(root);
+        tree.show();
+        return;
+      case 'deepth':
 
-    tree.show();
-  };
+        tree.deepth(root);
+        tree.show();
+        return;
+      case 'search':
 
-  deepth.onclick = function () {
-    var tree = new MultiTree(root);
-    tree.deepth(root);
-    tree.show();
+        var target = document.getElementById('target').value;
+        tree.search(target, root);
+        return;
+      case 'delete':
+        tree.selected.parentNode.removeChild(tree.selected);
+        return;
+      case 'add':
+        var newText = document.getElementById('new').value;
+        var newNode = document.createElement('div');
+        var content = document.createTextNode(newText);
+        newNode.appendChild(content);
+        newNode.className = 'child';
+        tree.selected.appendChild(newNode);
+        return;
+      default:
+        if (event.target.nodeName === 'DIV') {
+          var divs = [].concat(_toConsumableArray(document.getElementsByTagName('div')));
+          divs.map(function (item) {
+            item.style.background = 'white';
+          });
+          tree.selected = event.target;
+          event.target.style.background = 'navy';
+        }
+        return;
+    }
   };
 };
 

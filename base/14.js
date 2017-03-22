@@ -4,6 +4,7 @@ class MultiTree {
   constructor(root) {
     this.root = root
     this.queue = []
+    this.selected  = null
   }
 
   //深度优先遍历
@@ -56,7 +57,7 @@ class MultiTree {
             }
         }
 
-        await sleep(200);
+        // await sleep(200);
     })();
 
   }
@@ -85,9 +86,10 @@ class MultiTree {
 
 window.onload = function () {
   const root = document.getElementById('container')
+  const tree = new MultiTree(tree)
   document.onclick = function(event) {
     let tar = event.target.id
-    const tree = new MultiTree(tree)
+
     switch(tar){
       case 'breadth':
 
@@ -104,7 +106,26 @@ window.onload = function () {
         const target = document.getElementById('target').value
         tree.search(target, root)
         return;
+      case 'delete':
+        tree.selected.parentNode.removeChild(tree.selected)
+        return;
+      case 'add':
+        let newText = document.getElementById('new').value
+        let newNode = document.createElement('div')
+        let content = document.createTextNode(newText)
+        newNode.appendChild(content)
+        newNode.className = 'child'
+        tree.selected.appendChild(newNode)
+        return;
       default:
+        if(event.target.nodeName === 'DIV'){
+          var divs = [...document.getElementsByTagName('div')]
+          divs.map((item)=>{
+            item.style.background = 'white'
+          })
+          tree.selected = event.target
+          event.target.style.background = 'navy'
+        }
         return;
     }
   }

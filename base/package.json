@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "babel 13.js -o app.js&&browserify app.js -o bundle.js"
+    "build": "babel 14.js -o app.js&&browserify app.js -o bundle.js"
   },
   "author": "",
   "license": "ISC",
