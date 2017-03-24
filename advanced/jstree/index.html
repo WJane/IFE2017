@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>实现树形组件</title>
+  <style type="text/css">
+ body{
+    font-size: 1.5rem;
+  }
+
+  #content{
+    left: 50%;
+    top: 50%;
+    position: absolute;
+  }
+  span{
+    cursor: pointer;
+  }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div id="content">
+
+  </div>
+</div>
+</body>
+
+<script type="text/javascript">
+  var nodes = [ {name: "父节点1", children: [ {name: "子节点1"}, {name: "子节点2"} ]}, {name: "父节点2", children: [ {name: "子节点3"}, {name: "子节点4", children:[ {name:"子节点5"} ]} ]} ];
+
+
+ var html = '';
+
+  function recurse(node) {
+    for(var i=0;i<node.length;i++) {
+      var span = node[i].name
+        html +=('<div>'+span);
+
+      if(node[i].children){
+        flag = true;
+        html+='<span class="hide">-</span>'
+        recurse(node[i].children)
+      }
+
+      html+='</div>'
+    }
+  }
+recurse(nodes)
+
+ window.onload=function(){
+    var content = document.getElementById('content')
+    content.innerHTML = html
+
+    var spans = document.getElementsByTagName('span')
+
+    for(var i=0;i<spans.length;i++) {
+      var parent = spans[i].parentNode;
+
+      var arr = parent.getElementsByTagName('div')
+
+      for(var j=0;j<arr.length;j++){
+        arr[j].style.marginLeft = '20px'
+      }
+
+    }
+    for(var i=0;i<spans.length;i++){
+      spans[i].onclick = function(){
+        toggle(this)
+      }
+    }
+
+  }
+
+  function toggle(obj) {
+    var state = obj.innerText;
+    console.log(state)
+    var inner = '';
+    var bg;
+    if(state=='+'){
+      obj.className = 'hide'
+      obj.innerText = '-'
+      bh = 'block'
+    }else{
+      obj.className = 'show'
+      obj.innerText = '+'
+      bh = 'none'
+    }
+
+    var content = obj.parentNode.getElementsByTagName('div');
+    for(var i=0;i<content.length;i++) {
+      content[i].style.display = bh
+    }
+  }
+</script>
+</html>
