@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>使用CSS实现折叠面板</title>
+  <style type="text/css">
+    .radios{
+      width: 500px;
+      height: 600px;
+      overflow: hidden;
+    }
+    .title{
+      background: #e5e5e5;
+      display: block;
+      width: 500px;
+      height: 20px;
+      cursor: pointer;
+      padding: 10px;
+    }
+    .title label{
+      cursor: pointer;
+    }
+    input{
+      display: none;
+    }
+    input:checked + div {
+      height: 130px;
+    }
+    .content{
+      border: 1px solid silver;
+      width: 500px;
+      height: 0;
+      transition: height 0.7s;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+<div id="wrap">
+  <div class="radios">
+    <div>
+      <div class="title">
+        <label for="radio1">item1</label>
+      </div>
+      <input type="radio" id="radio1" name="item" class="radio">
+      <div class="content">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum optio dicta, assumenda modi odio ut amet magni odit magnam illum ipsa laborum qui, minima. Ipsam quaerat, necessitatibus vel aliquid in.
+      </div>
+    </div>
+    <div>
+      <div class="title">
+        <label for="radio2">item2</label>
+      </div>
+      <input type="radio" id="radio2" name="item" class="radio">
+      <div class="content">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, quibusdam magnam reprehenderit sed, debitis voluptatum praesentium in pariatur assumenda ea aut ullam vitae ab possimus, tempora veritatis qui numquam.
+      </div>
+    </div>
+    <div>
+      <div class="title">
+        <label for="radio3">item3</label>
+      </div>
+      <input type="radio" id="radio3" name="item" class="radio">
+      <div class="content">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate minima tenetur nostrum officia, omnis minus excepturi nesciunt! Necessitatibus saepe, sapiente voluptatem, quae totam, reprehenderit atque, ipsum optio adipisci mollitia iste.
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
