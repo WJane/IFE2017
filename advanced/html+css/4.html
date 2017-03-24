@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS3饼状loading效果</title>
+  <style type="text/css">
+    body{
+      display: flex;
+      min-height: 100vh;
+    }
+    #wrap{
+      margin: auto;
+      width: 400px;
+      height: 500px;
+      border: 5px solid tomato;
+      display: flex;
+      position: relative;
+    }
+    #circle{
+      width: 150px;
+      height: 150px;
+      margin: auto;
+      border: 10px solid;
+      border-color: tomato tomato tomato transparent;
+      border-radius: 50%;
+      background: transparent;
+      box-sizing: border-box;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -75px;
+      margin-left: -75px;
+      animation: round 2s linear infinite;
+    }
+    #round{
+      width: 80px;
+      height: 80px;
+      background: #FFA488;
+      background-image: linear-gradient(to right, transparent 50%, tomato 0);
+      border-radius: 50%;
+      margin: auto;
+
+    }
+    #round::before{
+      content: '';
+      display: block;
+      margin-left: 50%;
+      height: 100%;
+      border-radius: 0 100% 100% 0 / 50%;
+      background-color: #FFA488;
+      transform-origin: left;
+      animation: spin 2s linear infinite;
+      position: relative;
+
+    }
+    #round::after{
+      content: '';
+      display: block;
+      margin-left: 50%;
+      height: 100%;
+      background: transparent;
+      border-radius: 0 100% 100% 0 / 50%;
+      left: 0%;
+      top: -100%;
+      position: relative;
+      transform-origin: left;
+      animation: bg 2s linear infinite;
+    }
+    @keyframes spin {
+      0%{transform: rotate(0turn);}
+      25%{transform: rotate(0.5turn);}
+      50%{transform: rotate(0.5turn);}
+      75%{transform: rotate(0.5turn);}
+
+      100%{transform: rotate(0.5turn);}
+    }
+    @keyframes bg {
+      0%{transform: rotate(0turn);background: transparent;}
+
+      25%{transform: rotate(0turn);background: transparent;}
+
+      50%{transform: rotate(0.5turn);background: tomato;}
+      75%{transform: rotate(0.5turn);background: tomato;}
+
+      100%{transform: rotate(0.5turn);background: tomato;}
+    }
+    @keyframes round {
+      0%{transform: rotate(0);}
+
+
+      100%{transform: rotate(360deg);}
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <div id="circle"></div>
+      <div id="round"></div>
+
+
+
+  </div>
+<script type="text/javascript">
+  // var m=1,j=k=0;
+  // function add(n){
+  //   return n=n+1;
+  // }
+  // y=add(m)
+  // function add(n){
+  //   return n=n+3;
+  // }
+  // z=add(m)
+  // console.log(y) //4
+  // console.log(z) //4
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义网页右键菜单</title>
+  <style type="text/css">
+    body{
+      display: flex;
+      min-height: 100vh;
+    }
+    #content{
+      margin: auto;
+      width: 500px;
+      height: 100px;
+      border: 1px solid silver;
+      text-align: center;
+      line-height: 100px;
+    }
+    #menu{
+      width: 200px;
+      height: 80px;
+      border: 2px solid navy;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+    <div id="content">
+      right click to see the menu
+    </div>
+    <menu id="menu">
+      <ul>
+        <li>item1</li>
+        <li>item2</li>
+      </ul>
+    </menu>
+  <script type="text/javascript">
+  let menu = document.getElementById('menu');
+  document.getElementById('content').oncontextmenu=function(e){
+    e.stopPropagation();
+    menu.style.display = 'block'
+  }
+  document.addEventListener('click', function(e){
+    alert(e.target)
+  })
+  </script>
+</body>
+</html>
