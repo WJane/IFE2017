@@ -8,14 +8,20 @@
   <div id="app">
     <p>姓名：{{user.name}}</p>
     <p>年龄：{{user.age}}</p>
+    <p>学校：{{school}}</p>
+    <p>专业：{{major}}</p>
 </div>
 </body>
 <script type="text/javascript">
 
   (function(global){
+
     function Vue(data) {
-      this.data = data;
+
       this.render(data)
+      console.log(this)
+      this.data = data.data
+      this.walk(this.data)
     }
 
     Vue.prototype.render = function(data) {
@@ -46,17 +52,23 @@
         return val;
       }
     }
+
+    Vue.prototype.walk = function(obj) {
+
+    }
     global.Vue = Vue;
   })(window);
 
-  let app = new Vue({
-    el: '#app',
-    data: {
-      user: {
-        name: 'wz',
-        age: 23
-      }
-    }
+let app = new Vue({
+  el: '#app',
+  data: {
+    user: {
+      name: 'youngwind',
+      age: 25
+    },
+    school: 'bupt',
+    major: 'computer'
+  }
 });
 </script>
 </html>
