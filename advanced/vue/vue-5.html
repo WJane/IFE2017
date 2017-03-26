@@ -13,20 +13,93 @@
 </div>
 </body>
 <script type="text/javascript">
+  function clone(obj) {
+    if (typeof obj === 'object' && typeof obj !== 'null'){
+      var o = Object.prototype.toString.call(obj).slice(8,-1) === 'Array' ? [] : {};
+      for(var k in obj) {
+        if(typeof obj[k] === 'object' && typeof obj[k] !== 'null') {
+          o[k] = clone(obj[k])
+        } else {
+          o[k] = obj[k]
+        }
+      }
+    } else {
+      return obj
+    }
+    return o
+  }
 
+  function update(original, key, newVal) {
+    for(let k in original) {
+      let val = original[k]
+      if(k === key){
+        original[k] = newVal
+        return;
+      }
+
+      if(typeof val === 'object') {
+        update(val, key, newVal)
+      }
+
+    }
+  }
   (function(global){
 
     function Vue(data) {
 
       this.render(data)
-      console.log(this)
-      this.data = data.data
-      this.walk(this.data)
+      var that = this
+      var original = clone(data.data)
+
+      function Observer(data) {
+        this.data = data
+        this.walk(data)
+      }
+      let p = Observer.prototype
+      p.walk = function (obj) {
+        let val;
+        for (let key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            val = obj[key]
+            if (typeof val === 'object') {
+                new Observer(val);
+            }
+            this.convert(key, val)
+          }
+        }
+      }
+
+      p.convert = function (key, val) {
+        var self = this
+        Object.defineProperty(this.data, key, {
+            enumerable: true,
+            configurable: true,
+            get: function () {
+                return val
+            },
+            set: function (newVal) {
+
+                update(original, key, newVal)
+                var obj = {el:'#app', data:original}
+                that.render(obj)
+                if (newVal === val) return;
+
+            }
+        })
+      }
+
+      this.observer = new Observer(data.data)
+
+
     }
 
+    var el = document.querySelector('#app');
+    var content = el.innerHTML;
+
     Vue.prototype.render = function(data) {
-      var el = document.querySelector(data.el);
-      var content = el.innerHTML;
+
+
+
       var reg = /{{\S+}}/g; //匹配所有{{...}}
       var arr;
       var copy = content;
@@ -53,9 +126,6 @@
       }
     }
 
-    Vue.prototype.walk = function(obj) {
-
-    }
     global.Vue = Vue;
   })(window);
 
@@ -70,5 +140,11 @@ let app = new Vue({
     major: 'computer'
   }
 });
+
+app.observer.data.user.name = 'wz'
+app.observer.data.user.age = 23
+app.observer.data.school = '天津城建大学'
+app.observer.data.major = '环境工程'
+
 </script>
 </html>
