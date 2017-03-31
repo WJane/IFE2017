@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+
+  <script src="https://cdn.bootcss.com/three.js/r83/three.js"></script>
+
+        <script type="text/javascript">
+            function init() {
+                var renderer = new THREE.WebGLRenderer({
+                    canvas: document.getElementById('mainCanvas')
+                });
+                renderer.setClearColor(0x444444);
+                var scene = new THREE.Scene();
+
+                // camera
+                var camera = new THREE.PerspectiveCamera(9, 4 / 3, 1, 100);
+                camera.position.set(25, 25, 25);
+                camera.lookAt(new THREE.Vector3(0, 0, 0));
+                scene.add(camera);
+                // 灯光
+                var light = new THREE.DirectionalLight();
+                light.position.set(12, 11, 10);
+                scene.add(light);
+
+                //车身
+                var material = new THREE.MeshBasicMaterial({
+                    color: 0xffff00,
+                    wireframe: true
+                });
+
+                drawCube(scene)
+                drawTorus1 (scene)
+                drawTorus2 (scene, material)
+                // render
+                renderer.render(scene, camera);
+
+
+            }
+
+            function drawCube (scene) {
+                var cube = new THREE.Mesh(new THREE.CubeGeometry(4, 2, 2), new THREE.MeshLambertMaterial({
+                  color: 0xffffff
+                }));
+                cube.position.set(-1,1,1)
+                scene.add(cube);
+            }
+
+
+
+            function drawTorus1 (scene) {
+              var torus = new THREE.Mesh(new THREE.TorusGeometry(0.3,0.1,18,18), new THREE.MeshLambertMaterial({
+                color: 0xffffff
+              }))
+              torus.position.set(-1,1,3);
+              scene.add(torus)
+            }
+            function drawTorus2 (scene, material) {
+              var torus = new THREE.Mesh(new THREE.TorusGeometry(0.3,0.1,18,18), new THREE.MeshLambertMaterial({
+                color: 0xffffff
+              }))
+              torus.position.set(1,1,3)
+              scene.add(torus)
+            }
+
+        </script>
+    </head>
+
+    <body onload="init()">
+        <canvas id="mainCanvas" width="400px" height="300px" ></canvas>
+    </body>
+</html>
