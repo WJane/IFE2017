@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+
+  <script src="https://cdn.bootcss.com/three.js/r83/three.js"></script>
+    <script src="stats.js"></script>
+    <script type="text/javascript">
+            var requestAnimationFrame = window.requestAnimationFrame
+                    || window.mozRequestAnimationFrame
+                    || window.webkitRequestAnimationFrame
+                    || window.msRequestAnimationFrame;
+            window.requestAnimationFrame = requestAnimationFrame;
+
+            var scene = null;
+            var camera = null;
+            var renderer = null;
+
+            var id = null;
+
+            var stat = null;
+
+            var ballMesh = null;
+            var ballRadius = 0.5;
+            var isMoving = false;
+            var maxHeight = 5;
+            var cube = null
+            var torus1 = null
+            var torus2 = null
+            var v = 0;
+            var a = -0.01;
+
+            function init() {
+                stat = new Stats();
+                stat.domElement.style.position = 'absolute';
+                stat.domElement.style.right = '0px';
+                stat.domElement.style.top = '0px';
+                document.body.appendChild(stat.domElement);
+
+                renderer = new THREE.WebGLRenderer({
+                    canvas: document.getElementById('mainCanvas')
+                });
+                scene = new THREE.Scene();
+
+                camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
+                camera.position.set(20, 25, 25);
+                camera.lookAt(new THREE.Vector3(0, 3, 0));
+                scene.add(camera);
+
+
+                var texture = THREE.ImageUtils.loadTexture('./img/2.png', {}, function() {
+                    renderer.render(scene, camera);
+                });
+                var material = new THREE.MeshLambertMaterial({
+                    map: texture
+                });
+                cube = new THREE.Mesh(new THREE.CubeGeometry(4, 2, 2), new THREE.MeshLambertMaterial(material));
+
+                cube.position.set(0,1,0)
+                cube.castShadow = true
+                scene.add(cube);
+            var ttexture = new THREE.ImageUtils.loadTexture('./img/tire.png', {}, function() {
+                renderer.render(scene, camera)
+            })
+             var tmaterial = new THREE.MeshLambertMaterial({
+                    map: ttexture
+                });
+                 torus1 = new THREE.Mesh(new THREE.TorusGeometry(0.3,0.1,18,18), new THREE.MeshLambertMaterial(tmaterial))
+                torus1.castShadow = true
+              torus1.position.set(2,1,2);
+              scene.add(torus1)
+
+               torus2 = new THREE.Mesh(new THREE.TorusGeometry(0.3,0.1,18,18), new THREE.MeshLambertMaterial(tmaterial))
+
+              torus2.position.set(0,1,2)
+              torus2.castShadow = true
+              scene.add(torus2)
+                // plane
+                var texture = THREE.ImageUtils.loadTexture('./img/chess.png', {}, function() {
+                    renderer.render(scene, camera);
+                });
+                texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+                texture.repeat.set(4, 4);
+                var plane = new THREE.Mesh(new THREE.PlaneGeometry(7, 7),
+                        new THREE.MeshLambertMaterial({map: texture}));
+                plane.rotation.x = -Math.PI / 2;
+                scene.add(plane);
+
+                var light = new THREE.DirectionalLight(0xffffff);
+                light.position.set(10, 10, 15);
+                scene.add(light);
+
+                id = requestAnimationFrame(draw);
+            }
+
+            function draw() {
+                stat.begin();
+
+                if (direction === 'forth') {
+                    if(cube.position.x >= -4){
+                       cube.position.x -= 0.03
+                    }
+                    if(torus1.position.x>=-2){
+                        torus1.position.x -=0.03
+                    }
+                    if(torus2.position.x>=-4){
+                        torus2.position.x -= 0.03
+                    }
+                    direction = ''
+
+                } else if (direction === 'back') {
+                    if(cube.position.x <= 3){
+                       cube.position.x += 0.03
+                    }
+                    if(torus1.position.x<=5){
+                        torus1.position.x += 0.03
+                    }
+                    if(torus2.position.x<=3){
+                        torus2.position.x += 0.03
+                    }
+                    direction = ''
+                } else if (direction === 'turn')  {
+                    cube.rotation.y += 0.05
+                    //bug!!!
+                    torus1.rotation.y += 0.05
+                    torus2.rotation.y += 0.05
+                    direction = ''
+                } else {
+                    return;
+                }
+                renderer.render(scene, camera);
+
+                id = requestAnimationFrame(draw);
+
+                stat.end();
+            }
+
+            function stop() {
+                if (id !== null) {
+                    cancelAnimationFrame(id);
+                    id = null;
+                }
+            }
+
+            function drop() {
+                isMoving = true;
+                cube.position.y = 0;
+                v = 0;
+            }
+            var direction;
+            document.onkeydown = function (e) {
+                console.log(e)
+                // w 87     s 83
+                switch(e.keyCode){
+                    //a  后退
+                    case 65:
+                        direction = 'forth';
+                        draw()
+                        break;
+                    //   d 前进
+                    case 68:
+                        direction = 'back'
+                        draw()
+                        break;
+                    //转弯
+                    case 87:
+                        direction = 'turn'
+                        draw()
+                        break;
+                    default:
+                        break;
+                }
+            }
+        </script>
+    </head>
+
+    <body onload="init()">
+        <canvas id="mainCanvas" width="600px" height="400px" ></canvas>
+        <button id="dropBtn" onclick="stop()">Stop</button>
+</body>
+</html>
+
