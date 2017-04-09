@@ -141,10 +141,11 @@ let app = new Vue({
   }
 });
 
-app.observer.data.user.name = 'wz'
-app.observer.data.user.age = 23
-app.observer.data.school = '天津城建大学'
-app.observer.data.major = '环境工程'
+app = app.observer
+app.data.user.name = 'wz'
+app.data.user.age = 23
+app.data.school = '天津城建大学'
+app.data.major = '环境工程'
 
 </script>
 </html>

@@ -54,7 +54,7 @@ p.convert = function (key, val) {
             console.log('你设置了' + key);
             console.log('新的' + key + ' = ' + newVal)
             if (newVal === val) return;
-            console.log('我的姓名发生了变化，可能是姓氏变了，也可能是名字变了')
+
             // val = newVal;
             // that.handlers[key].apply(this, [newVal]);
         }
