@@ -39,11 +39,14 @@
 
         //若是符号
       } else {
-        let top = stack.pop()   //栈顶元素
+        let top = stack.pop()   //栈顶元素，出栈
         //是右括号或优先级低于栈顶符号（乘除优先加减）则栈顶元素依次出栈并输出
-        if (v==')'||compare(top, v)==-1) {
-          suffixExp+=top
+        while (v==')'||compare(top, v)==-1) {
+          suffixExp += top
+          stack.unshift(v)
+          top = stack.pop()
         }
+
 
       }
     }
