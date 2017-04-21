@@ -6,6 +6,21 @@
   count.onclick = function () {
     let current = content.value.trim()
     //9+(3-1)*3+10/2  ==> 9 3 1- 3 * + 10 2 / +
+    let arr = []
+    //合并数字
+    for(let [index,value] of current) {
+      if (/\d/.exec(value)) {
+        let i = index
+        while(/\d/.exec(value[i++])){
+          value+=current[i]
+          i++
+        }
+        arr.push(value)
+      } else {
+        arr.push(value)
+      }
+    }
+
 
     //中缀表达式转化为后缀表达式
     let stack = []
